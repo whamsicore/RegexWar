@@ -1,4 +1,5 @@
 var Question = require('./questionModel');
+var User = require('../users/userModel');
 var questionValidation = require('../question_validation/validation');
 
 // adds a question to the database
@@ -18,6 +19,16 @@ var add = function(req, res, next) {
       falsy: str.falsy,
       solution: str.solution
     }
+
+    User.update({'_id': req.session.passport.user}, 
+      {$push: {'submittedQuestions': str.qNumber}},
+      {upsert: true},
+      function(err, user){
+        if(err)
+          console.log('error in updating user submitted questions', err);
+        else
+          console.log(user, '==================================');
+    });
 
     var newQ = new Question(question);
     newQ.save(function(err, newEntry) {

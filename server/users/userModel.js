@@ -20,7 +20,9 @@ var UserSchema = new mongoose.Schema({
       score: Number, 
       time: Number, 
       timestamp: String
-    }]
+    }],
+
+  submittedQuestions: [Number],
 
   // format is intended to be: { <qNumber>: "solution string", ...}
   // entries will only exist for a question that the user has solved.
