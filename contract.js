@@ -1,4 +1,5 @@
 user = {
+  _id: number,
   google: {
     id: hex, 
     token: hex,
