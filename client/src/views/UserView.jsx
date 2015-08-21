@@ -29,13 +29,27 @@ var UserView = React.createClass({
   render: function() {
     var user = this.props.user;
     if (user.hasOwnProperty('google')) {
-      console.log(user);
       var google = user.google;
-      console.log('google', google);
+      console.log(user);
+
+      // user submitted questions
+      var solvedQuestionsList = this.props.user.submittedQuestions.map(function(question) {
+        return (
+          <li className="question">
+            <span>{question.title}</span>
+          </li>
+        )
+      });
+      // all questions available
+      var allQuestionsList = this.props.questions.map(function(question) {
+        return (
+          <li key={question.qNumber} className="question">
+            <Link to="question" params={{qNumber:question.qNumber}} > {question.title} </Link>
+          </li>
+        )
+      });
+
       
-
-      console.log(user.stats);
-
       return (<div className=""> 
         <div className="panel">
         <div className="panel-body row">
@@ -52,7 +66,7 @@ var UserView = React.createClass({
         </div>
         </div>
         <div className="row">
-          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+          <div className="col-xs-6 col-sm-4 col-md-3 col-lg-3 regexResults">
             <div className="panel panel-success">
               <div className="panel-heading">
                 <h4 className="panel-title">Regex Results</h4>
@@ -63,13 +77,15 @@ var UserView = React.createClass({
               </div> 
             </div>
           </div>
-           <div className="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+           <div className="col-xs-6 col-sm-4 col-md-3 col-lg-3 submittedQuestions">
             <div className="panel panel-warning">
               <div className="panel-heading">
                 <h3 className="panel-title">Submitted Challenges</h3>
               </div>
               <div className="panel-body">
-                Some content
+                <ul>
+                  {solvedQuestionsList}
+                </ul>
               </div>
             </div>
           </div>
@@ -79,7 +95,7 @@ var UserView = React.createClass({
                 <h3 className="panel-title">More info</h3>
               </div>
               <div className="panel-body">
-                Some content
+                Some more content here :)
               </div>
             </div>
           </div>
