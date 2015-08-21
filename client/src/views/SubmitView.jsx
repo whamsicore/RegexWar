@@ -56,6 +56,7 @@ var SubmitView = React.createClass({
       method: 'POST',
       data: JSON.stringify(question),
       dataType: 'json',
+      xhrFields: {withCredentials: true},
       success: function(data){
         that.setState({questions: that.props.questions.push(data)})
         console.log('success!', that.props.questions);
