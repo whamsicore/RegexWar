@@ -63,8 +63,7 @@ var SubmitView = React.createClass({
         location = "/#/questions";
       },
       error: function(xhr, status, err){
-        console.log(xhr, "XHR", status, "STATUS");
-        if(status === 401){
+        if(xhr.status === 401){
           $('#alert-content').html('');
           $('#alert-content').html('<p>Sorry, you need to sign in to do that.</p>');
           $('#alert-error').show();
