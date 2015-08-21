@@ -97,6 +97,17 @@ var SubmitView = React.createClass({
         $('#alert-content').html('<p>You must provide at least five failing test cases.<p>');
         $('#alert-error').show();
       }
+    }else if(this.refs.challengeTitle.getValue() === '' || this.refs.challengeDescription.getValue() === ''){
+       if(this.refs.challengeTitle.getValue() === ''){
+        $('#alert-content').html('');
+        $('#alert-content').html('<p>Please give your challenge a title.<p>');
+        $('#alert-error').show(); 
+      }
+      if(this.refs.challengeDescription.getValue() === ''){
+        $('#alert-content').html('');
+        $('#alert-content').html('<p>Please provide a descripton for your challenge.<p>');
+        $('#alert-error').show();
+      }
     }else{
       passing.forEach(function(item){
         if(!regex.test(item)){
@@ -137,6 +148,7 @@ var SubmitView = React.createClass({
       <div className="panel">
         <div className="panel-body">
         <h3>Submit your own challenge</h3>
+        <h5><i>All fields required</i></h5>
         <div className="alert alert-dismissable alert-danger" id="alert-error" style={{display: "none"}}>
           <button type="button" className="close">×</button>
           <h4>Warning!</h4>
