@@ -63,10 +63,17 @@ var SubmitView = React.createClass({
         location = "/#/questions";
       },
       error: function(xhr, status, err){
-        $('#alert-content').html('');
-        $('#alert-content').html('<p>Something went wrong with the server, please try again.</p>');
-        $('#alert-error').show();
-        console.log(err);
+        console.log(xhr, "XHR", status, "STATUS");
+        if(status === 401){
+          $('#alert-content').html('');
+          $('#alert-content').html('<p>Sorry, you need to sign in to do that.</p>');
+          $('#alert-error').show();
+        }else{
+          $('#alert-content').html('');
+          $('#alert-content').html('<p>Something went wrong with the server, please try again.</p>');
+          $('#alert-error').show();
+          console.log(err);
+        }
       }
     });
   },
@@ -78,42 +85,50 @@ var SubmitView = React.createClass({
     var failing = this.falsy();
     var passTruthy = true;
     var passFalsy = true;
+    var passLen = passing.length < 5 ? true : false;
+    var failLen = failing.length < 5 ? true : false;
 
-    // if(passing.length < 5){
-    //   alert('Please enter at least five passing tests.');
-    // }
-    // if(failing.length < 5){
-    //   alert('Please enter at least five failing tests.');
-    // }
-    passing.forEach(function(item){
-      if(!regex.test(item)){
-        passTruthy = false;
+    if(passLen || failLen){
+      if(passLen){
+        $('#alert-content').html('');
+        $('#alert-content').html('<p>You must provide at least five passing test cases.<p>');
+        $('#alert-error').show();
+      }else{
+        $('#alert-content').html('');
+        $('#alert-content').html('<p>You must provide at least five failing test cases.<p>');
+        $('#alert-error').show();
       }
-      // the following line of code is required to work around a bug in ECMA script 3 go to http://stackoverflow.com/questions/3891641/regex-test-only-works-every-other-time to see why
-      regex.test(item);
-    });
-    failing.forEach(function(item){
-      if(regex.test(item)){
-        passFalsy = false;
-      }
-      // the following line of code is required to work around a bug in ECMA script 3 go to http://stackoverflow.com/questions/3891641/regex-test-only-works-every-other-time to see why
-      regex.test(item);
-    });
-    if(passTruthy && passFalsy){
-      //if all test 'pass' then submit a question object to the server
-      console.log(qNumber);
-      this.submit({
-        title: this.refs.challengeTitle.getValue(),
-        description: this.refs.challengeDescription.getValue(),
-        truthy: passing,
-        falsy: failing,
-        solution: this.refs.challengeAnswer.getValue(),
-        qNumber: qNumber
-      });
     }else{
-      $('#alert-content').html('');
-      $('#alert-content').html('<p>Unable to submit. Your solution does not solve the problem or your test cases are incorrect. Please try again.</p>');
-      $('#alert-error').show();
+      passing.forEach(function(item){
+        if(!regex.test(item)){
+          passTruthy = false;
+        }
+        // the following line of code is required to work around a bug in ECMA script 3 go to http://stackoverflow.com/questions/3891641/regex-test-only-works-every-other-time to see why
+        regex.test(item);
+      });
+      failing.forEach(function(item){
+        if(regex.test(item)){
+          passFalsy = false;
+        }
+        // the following line of code is required to work around a bug in ECMA script 3 go to http://stackoverflow.com/questions/3891641/regex-test-only-works-every-other-time to see why
+        regex.test(item);
+      });
+      if(passTruthy && passFalsy){
+        //if all test 'pass' then submit a question object to the server
+        console.log(qNumber);
+        this.submit({
+          title: this.refs.challengeTitle.getValue(),
+          description: this.refs.challengeDescription.getValue(),
+          truthy: passing,
+          falsy: failing,
+          solution: this.refs.challengeAnswer.getValue(),
+          qNumber: qNumber
+        });
+      }else{
+        $('#alert-content').html('');
+        $('#alert-content').html('<p>Unable to submit. Your solution does not solve the problem or your test cases are incorrect. Please try again.</p>');
+        $('#alert-error').show();
+      }
     }
   },
 
