@@ -20,11 +20,11 @@ var add = function(req, res, next) {
       solution: str.solution
     }
 
-    // console.log(req.user,'=================add q=================');
+    console.log(req.user,'=================add q=================');
 
-    User.update({'_id': req.user._id}, 
-      {$push: {'submittedQuestions': [str.qNumber, str.title]}},
-      {upsert: true},
+    User.findByIdAndUpdate(req.user._id, 
+      {$push: {submittedQuestions: {qNumber: 5, title: str.title} } },
+      {safe: true},
       function(err, user){
         if(err)
           console.log('error in updating user submitted questions', err);
