@@ -62,8 +62,9 @@ var SubmitView = React.createClass({
         location = "/#/questions";
       },
       error: function(xhr, status, err){
-        // alert("Something didn't work, please try again.");
-        $('#server-error').show();
+        $('#alert-content').html('');
+        $('#alert-content').html('<p>Something went wrong with the server, please try again.</p>');
+        $('#alert-error').show();
         console.log(err);
       }
     });
@@ -109,9 +110,9 @@ var SubmitView = React.createClass({
         qNumber: qNumber
       });
     }else{
-
-      alert('Unable to submit, Your solution does not solve the problem or your test cases are incorrect. Please try again');
-      // $('#question-dialog').toggle();
+      $('#alert-content').html('');
+      $('#alert-content').html('<p>Unable to submit. Your solution does not solve the problem or your test cases are incorrect. Please try again.</p>');
+      $('#alert-error').show();
     }
   },
 
@@ -121,10 +122,10 @@ var SubmitView = React.createClass({
       <div className="panel">
         <div className="panel-body">
         <h3>Submit your own challenge</h3>
-        <div className="alert alert-dismissable alert-danger" id="server-error" style={{display: "none"}}>
+        <div className="alert alert-dismissable alert-danger" id="alert-error" style={{display: "none"}}>
           <button type="button" className="close">×</button>
           <h4>Warning!</h4>
-          <p>Something did not work, please try again.</p>
+          <div id="alert-content"></div>
         </div>
           <form className="form-inline ">
           <div className="row"> 
@@ -156,17 +157,6 @@ var SubmitView = React.createClass({
               <div className="ripple-wrapper"></div>
             </button>
           </form>
-
-          <div id="question-dialog" className="modal fade" tabindex="-1">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-body">
-                  <p>Either your solution does not solve the problem or your test cases are not passing, Please try again.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>  
 
