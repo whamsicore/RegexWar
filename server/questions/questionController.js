@@ -20,8 +20,10 @@ var add = function(req, res, next) {
       solution: str.solution
     }
 
-    User.update({'_id': req.session.passport.user}, 
-      {$push: {'submittedQuestions': str.qNumber}},
+    // console.log(req.user,'=================add q=================');
+
+    User.update({'_id': req.user._id}, 
+      {$push: {'submittedQuestions': [str.qNumber, str.title]}},
       {upsert: true},
       function(err, user){
         if(err)
