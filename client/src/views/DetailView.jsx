@@ -150,7 +150,7 @@ var DetailView = React.createClass({
     //variables: elapsed, length;
     var time = this.state.elapsed; //25 +/- 25 seconds, +/- up to 30 points
     var length = this.state.result.length; //10 +/- 15 letters, +/- up to 30 points
-    var score = 50-(time-25)*30/25-(length-10)*30/15;
+    var score = 50-(time-25)*30/25-(length-10)*30/15; //server side copy @ userController.newSolution()
     return score;
   },  
   submitSolution: function(data){ //submit user solution to database
@@ -160,15 +160,19 @@ var DetailView = React.createClass({
       console.log("TEST ----> user=", this.props.user);
       var user = this.props.user;
       
-      $.ajax({
-        url: window.location.origin + '/user/solved',
-        method: 'POST',
-        data: JSON.stringify({
+      var data = {
           u_id: user._id,
           q_id: this.props.params.qNumber,
           solution: this.state.result,
-          time: this.state.elapsed,
-        }),
+          time: this.state.elapsed
+        };
+
+      $.ajax({
+        url: window.location.origin + '/user/solved',
+        method: 'POST',
+        // type: 'POST',
+        // data: JSON.stringify(data),
+        data: data,
         dataType: 'json',
         success: function(){
           console.log('success!');
