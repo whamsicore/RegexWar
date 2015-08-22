@@ -167,7 +167,8 @@ var DetailView = React.createClass({
           u_id: user._id,
           q_id: this.props.params.qNumber,
           solution: this.state.result,
-          time: this.state.elapsed
+          time: this.state.elapsed,
+          q_title: this.props.questions[this.props.params.qNumber]
         };
 
       $.ajax({

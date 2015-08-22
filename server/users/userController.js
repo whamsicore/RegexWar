@@ -32,6 +32,7 @@ var newSolution = function(req, res){
     var u_id = data.u_id;
     var q_id = data.q_id;
     var solution = data.solution;
+    var q_title = data.q_title;
     var time = data.time;
     
     var length = solution.length;
@@ -44,6 +45,7 @@ var newSolution = function(req, res){
       
       var newStat = {
         q_id: q_id,
+        q_title: q_title,
         solution: solution,
         score:score,
         time: time
