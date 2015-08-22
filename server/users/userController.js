@@ -36,7 +36,7 @@ var newSolution = function(req, res){
     var time = data.time;
     
     var length = solution.length;
-    var score = 50-(time-25)*30/25-(length-10)*30/15;
+    var score = Math.floor(50-(time-25)*30/25-(length-10)*30/15); //copy in DetailView
 
 
     User.findOne({_id:u_id}, function(err, person){
