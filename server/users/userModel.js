@@ -25,7 +25,8 @@ var UserSchema = new mongoose.Schema({
       solution: String,
       score: Number, 
       time: Number, 
-      timestamp: String
+      timestamp: String,
+      q_title: String
     }],
 
   submittedQuestions: [{qNumder: {type: Number}, title: {type: String}}],
