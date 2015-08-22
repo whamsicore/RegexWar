@@ -133,7 +133,7 @@ var App = React.createClass({
   render: function() {
     var leftNavMenuItems = [
       { route: 'home', text: 'Home' },
-      { route: 'questions', text: 'Take a Challenge' },
+      { route: 'questions', text: 'Solve a Challenge' },
       { route: 'submit', text: 'Submit a Challenge' },
       { route: 'info', text: 'About' },
     ];
