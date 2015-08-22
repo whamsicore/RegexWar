@@ -16,7 +16,12 @@ var UserSchema = new mongoose.Schema({
   score: {type: Number, default:0},
 
   stats: [{
-      question: String, 
+      // question: [{
+      //   type: Schema.Types.ObjectId,
+      //   ref: 'Question'
+      // }],
+      q_id: Number, 
+      solution: String,
       score: Number, 
       time: Number, 
       timestamp: String

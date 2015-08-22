@@ -155,7 +155,10 @@ var DetailView = React.createClass({
   },  
   submitSolution: function(data){ //submit user solution to database
     console.log('TEST inside submitSolution');
-      
+    if(this.props.user === undefined){
+      alert("Login to save your score :-)");
+    }
+
     try{
       console.log("TEST ----> user=", this.props.user);
       var user = this.props.user;
@@ -171,15 +174,15 @@ var DetailView = React.createClass({
         url: window.location.origin + '/user/solved',
         method: 'POST',
         // type: 'POST',
-        // data: JSON.stringify(data),
-        data: data,
+        data: JSON.stringify(data),
+        // data: data,
         dataType: 'json',
         success: function(){
           console.log('success!');
         },
         error: function(xhr, status, err){
           console.log(err);
-          alert("You must login before you can save your score.");
+          // alert("You must login before you can save your score.");
         }
       }); //ajax
     }catch(err){
