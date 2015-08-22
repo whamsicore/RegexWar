@@ -19,6 +19,7 @@ var userInfo = function(req, res, next){
 //   }; //data formate
 
 var newSolution = function(req, res){
+  console.log("TEST inside newSolution()")
   var str = '';
   
   req.on('data', function(chunk){
@@ -32,20 +33,33 @@ var newSolution = function(req, res){
     var q_id = data.q_id;
     var solution = data.solution;
     var time = data.time;
-  	
+    
     var length = solution.length;
     var score = 50-(time-25)*30/25-(length-10)*30/15;
 
+
     User.findOne({_id:u_id}, function(err, person){
+      //update stat:
+      console.log("TEST inside update stats", person.stats);
+      
+      var newStat = {
+        q_id: q_id,
+        solution: solution,
+        score:score,
+        time: time
+        // timestamp: new Date()
+      }; //newStat
+
       person.score = person.score+score; 
       person.save();
       console.log("user update successful");
       
+      User.update({_id:u_id}, {$push: {stats: newStat}}, function(){
+        console.log("Update successful");
+      }); 
+      
     }); // update user
 
-    // User.update({_id:u_id}, {score: score}, function(){
-
-    // });
     // var user = User.find({_id:u_id}).exec(function(person){
     //   console.log("found user");
 
