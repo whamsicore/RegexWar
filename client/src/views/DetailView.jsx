@@ -150,7 +150,7 @@ var DetailView = React.createClass({
     //variables: elapsed, length;
     var time = this.state.elapsed; //25 +/- 25 seconds, +/- up to 30 points
     var length = this.state.result.length; //10 +/- 15 letters, +/- up to 30 points
-    var score = 50-(time-25)*30/25-(length-10)*30/15; //server side copy @ userController.newSolution()
+    var score = Math.floor(50-(time-25)*30/25-(length-10)*30/15); //server side copy @ userController.newSolution()
     return score;
   },  
   submitSolution: function(data){ //submit user solution to database
@@ -168,7 +168,7 @@ var DetailView = React.createClass({
           q_id: this.props.params.qNumber,
           solution: this.state.result,
           time: this.state.elapsed,
-          q_title: this.props.questions[this.props.params.qNumber]
+          q_title: this.props.questions[this.props.params.qNumber].title
         };
 
       $.ajax({
