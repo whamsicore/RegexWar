@@ -12,7 +12,8 @@ var UserSchema = new mongoose.Schema({
     profileCover: {type: String, default: 'unknown'},
     profileImage: {type: String, default: 'unknown'},
   },
-
+ 
+ 
   score: {type: Number, default:0},
 
   stats: [{
