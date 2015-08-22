@@ -15,7 +15,6 @@ var UserSchema = new mongoose.Schema({
  
  
   score: {type: Number, default:0},
-
   stats: [{
       // question: [{
       //   type: Schema.Types.ObjectId,

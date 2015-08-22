@@ -56,7 +56,9 @@ var newSolution = function(req, res){
       person.save();
       console.log("user update successful");
       
-      User.update({_id:u_id}, {$push: {stats: newStat}}, function(){
+      User.update({_id:u_id}, {$push: {
+        stats: newStat
+      }}, function(){
         console.log("Update successful");
       }); 
       

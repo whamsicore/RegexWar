@@ -88,6 +88,7 @@ var App = React.createClass({
       success: function(data){
         console.log('user', data);
         that.setState({user: data});
+        // this.props.user = data;
       },
       error: function(xhr, status, err){
         console.error(xhr, status, err.message);
@@ -214,7 +215,7 @@ var routes = (
 Router.run(routes, function(Handler, state){
   var params = state.params;
   React.render(<Handler params={params}/>, document.body);
-  console.log('test inside master routing');
+  // console.log('test inside master routing');
 });
 
 
