@@ -19,8 +19,24 @@ var OverView = React.createClass({
       muiTheme: ThemeManager.getCurrentTheme()
     }; 
   },
-
   render: function() {
+
+    // console.log('TEST----------->');
+    var indicateSolved = function(q_id, user){
+      try{
+        var stats = user.stats; 
+        for(var i=0; i<stats.length;i++){
+          if(stats[i].q_id === q_id){
+            return "Solved!";
+          }
+        } // for
+        return "Unsolved!";
+      }catch(err){
+        return "Unsolved2!";
+      } //try
+
+    }; //indicateSolved()
+
     // think of propos as immutable within the component, that is, never write to this.props.
     // https://facebook.github.io/react/docs/displaying-data.html
     var questions = this.props.questions.map(function(question) {
@@ -29,10 +45,10 @@ var OverView = React.createClass({
           <td><b>{question.title}</b></td>
           <td><p>{question.description}</p></td>
           <td><RaisedButton label="Solve" linkButton="true" params={{qNumber:question.qNumber}} containerElement={<Link to="question"/>}/></td>
-          <td><p>Indication if user already solved</p></td>
+          <td><p>{indicateSolved(question.qNumber, this.props.user)}</p></td>
         </tr>
       )
-    });
+    }.bind(this));
 
     // Since JSX is JavaScript, identifiers such as class and for are discouraged as XML attribute names. 
     // Instead, React DOM components expect DOM property names like className and htmlFor, respectively.
