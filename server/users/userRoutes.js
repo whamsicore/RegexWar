@@ -11,7 +11,7 @@ module.exports = function (app, passport) {
   app.get('/auth/google', passport.authenticate('google', {scope: ['profile']}));
   app.get('/auth/google/callback', passport.authenticate('google'), 
     function(req, res){
-      res.redirect('/');
+      res.redirect('/#/questions');
     });
 
   app.get('/logout', function(req, res){
