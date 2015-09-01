@@ -30,9 +30,9 @@ var OverView = React.createClass({
             return "Solved!";
           }
         } // for
-        return "Unsolved!";
+        return "Unsolved";
       }catch(err){
-        return "Unsolved2!";
+        return "Unsolved";
       } //try
 
     }; //indicateSolved()

@@ -4,8 +4,9 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "test": "mocha server/tests/serverSpec.js"
+    "start": "nodemon server/server.js",
+    "test": "mocha server/tests/serverSpec.js",
+    "postinstall": "bash ./post_install.sh"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,10 @@
   "homepage": "https://github.com/familiar-protein/familiar-protein#readme",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "bower": "^1.5.2",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
+    "grunt": "^0.4.5",
     "gulp": "^3.9.0",
     "material-ui": "^0.10.4",
     "mongoose": "^4.1.1",

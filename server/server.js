@@ -5,7 +5,7 @@ var passport = require('passport');
 var session = require('express-session');
 require('./config/db');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 
 var app = express();
 
